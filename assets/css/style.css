@@ -1,0 +1,39 @@
+.jumbotron {
+    background-color: lightblue;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.jumbotron, .card {
+    border: 1px solid #4c45ec;
+}
+
+.card-header, .btn {
+    background-color: #4c45ec;
+}
+
+.table th {
+    border-top: none;
+}
+
+th, td, label {
+    font-size: .90rem;
+}
+
+label {
+    font-weight: bold;
+}

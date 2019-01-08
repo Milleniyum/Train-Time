@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Train Time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS CDN  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    <!-- Local CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="jumbotron">
+            <h1>Anytime is Train Time</h1>
+            <h2>Choo Choo. Chee Chee.</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Current Train Schedule</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Train Name</th>
+                                    <th scope="col">Destination</th>
+                                    <th scope="col">Frequency (min)</th>
+                                    <th scope="col">Next Arrival</th>
+                                    <th scope="col">Minutes Away</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trenton Express</th>
+                                    <td>Trenton</td>
+                                    <td>25</td>
+                                    <td>05:35 PM</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>Oregon Trail</th>
+                                    <td>Salem, Oregon</td>
+                                    <td>3600</td>
+                                    <td>01:39 PM</td>
+                                    <td>1154</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Add Train</h4>
+                    </div>
+                    <div class="card-body">
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label for="train">Train Name</label>
+                                <input type="text" class="form-control" id="train-name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="destination">Destination</label>
+                                <input type="text" class="form-control" id="destination" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="time">First Train Time (HH:mm - military time)</label>
+                                <input type="text" class="form-control" id="train-name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="frequency">Frequency</label>
+                                <input type="text" class="form-control" id="frequency" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="submit-train">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end container -->
+
+    <script src="assets/javascript/train_time.js"></script>
+</body>
+
+</html>
