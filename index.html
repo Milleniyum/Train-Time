@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
     <!-- Local CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-database.js"></script>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
@@ -27,7 +32,7 @@
                         <h4>Current Train Schedule</h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-responsive-sm">
+                        <table class="table table-responsive-sm" id="train-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Train Name</th>
@@ -37,22 +42,7 @@
                                     <th scope="col">Minutes Away</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Trenton Express</th>
-                                    <td>Trenton</td>
-                                    <td>25</td>
-                                    <td>05:35 PM</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>Oregon Trail</th>
-                                    <td>Salem, Oregon</td>
-                                    <td>3600</td>
-                                    <td>01:39 PM</td>
-                                    <td>1154</td>
-                                </tr>
-                            </tbody>
+                            <tbody id="train-table"></tbody>
                         </table>
                     </div>
                 </div>
@@ -71,7 +61,7 @@
 
                             <div class="form-group">
                                 <label for="train">Train Name</label>
-                                <input type="text" class="form-control" id="train-name" required>
+                                <input type="text" class="form-control" id="train" required>
                             </div>
 
                             <div class="form-group">
@@ -81,21 +71,23 @@
 
                             <div class="form-group">
                                 <label for="time">First Train Time (HH:mm - military time)</label>
-                                <input type="text" class="form-control" id="train-name" required>
+                                <input type="text" class="form-control" id="time" placeholder="HH:mm" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="frequency">Frequency</label>
+                                <label for="frequency">Frequency (min)</label>
                                 <input type="text" class="form-control" id="frequency" required>
                             </div>
 
                             <button type="submit" class="btn btn-primary" id="submit-train">Submit</button>
+                            <div id="submit-error" style="color: red"></div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- end container -->
+    </div>
+    <!-- end container -->
 
     <script src="assets/javascript/train_time.js"></script>
 </body>
