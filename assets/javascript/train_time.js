@@ -21,16 +21,12 @@ $('#submit-train').on("click", function(event) {
     var train = $('#train').val().trim();
     var destination = $('#destination').val().trim();
     var frequency = $('#frequency').val().trim();
-
-    var time = new Date();
-    var hour = $('#time').val().trim().split(':')[0];
-    var minute = $('#time').val().trim().split(':')[1];
-    time.setHours(hour, minute, 0);
+    var time = $('#time').val().trim();
 
     db.ref().push({
         train: train,
         destination: destination,
-        time: time.toString(),
+        time: time,
         frequency: frequency
     });
 
@@ -41,15 +37,15 @@ $('#submit-train').on("click", function(event) {
 });
 
 db.ref().on("child_added", function(snapshot) {
-    var date = snapshot.val().time;
+    var time = snapshot.val().time;
     var freq = snapshot.val().frequency;
-    calcTimes(date, freq);
+    calcTimes(time, freq);
 
     var newTR = $('<tr>');
     newTR.append('<td>' + snapshot.val().train + '</td>');
     newTR.append('<td>' + snapshot.val().destination + '</td>');
-    newTR.append('<td>' + snapshot.val().frequency + '</td>');
-    newTR.append('<td>' + nextArrival + '</td>');
+    newTR.append('<td>' + freq + '</td>');
+    newTR.append('<td>' + moment(nextArrival).format("hh:mm A") + '</td>');
     newTR.append('<td>' + minutesAway + '</td>');
     $('#train-table').append(newTR)
 
@@ -73,36 +69,13 @@ $('#frequency').on("keypress", function(event) {
 
 //Functions ************************************************************
 
-function calcTimes(date, freq) {
-    var now = new Date();
-    var trainTime = new Date(date);
-    var h = 0;
-    var m = 0;
-
-    if (trainTime >= now) {
-        h = trainTime.getHours();
-        m = trainTime.getMinutes();
-        h = (h > 12 ? (h - 12) : h);
-        h = (h === 0 ? 12 : h);
-        h = (h < 10 ? '0' : '') + h;
-        m = (m < 10 ? '0' : '') + m;
-
-    } else {
-        do {
-            trainTime = new Date(trainTime.getTime() + freq * 60000);
-        }
-        while (trainTime <= now);
-
-        h = trainTime.getHours();
-        m = trainTime.getMinutes();
-        h = (h > 12 ? (h - 12) : h);
-        h = (h === 0 ? 12 : h);
-        h = (h < 10 ? '0' : '') + h;
-        m = (m < 10 ? '0' : '') + m;
-    }
-
-    minutesAway = Math.ceil((trainTime.getTime() - now.getTime()) / 60000);
-    nextArrival = (h + ':' + m + (trainTime.getHours() >= 12 ? ' PM' : ' AM'));
+function calcTimes(time, freq) {
+    var now = moment();
+    var trainTime = moment(time, "HH:mm").subtract(1, "years");
+    var timeDiff = moment().diff(moment(trainTime), "minutes");
+    var timeRem = timeDiff % freq;
+    minutesAway = freq - timeRem;
+    nextArrival = moment().add(minutesAway, "minutes");
 };
 
 // sortTable function obtained from https://www.w3schools.com/howto/howto_js_sort_table.asp
